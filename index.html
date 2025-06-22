@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<title>Aldrete Score Calculator</title>
+<style>
+  body { font-family: Arial, sans-serif; padding: 20px; }
+  label, select { display: block; margin-top: 10px; }
+  .result { margin-top: 20px; font-size: 18px; font-weight: bold; }
+</style>
+</head>
+<body>
+<h2>Aldrete Score Calculator</h2>
+<form id="aldreteForm">
+  <label>Activity:
+    <select id="activity">
+      <option value="2">2 – Moves all limbs</option>
+      <option value="1">1 – Moves 2 limbs</option>
+      <option value="0">0 – No movement</option>
+    </select>
+  </label>
+  <label>Respiration:
+    <select id="respiration">
+      <option value="2">2 – Deep breath/coughs freely</option>
+      <option value="1">1 – Dyspnea/Shallow breathing</option>
+      <option value="0">0 – Apnea</option>
+    </select>
+  </label>
+  <label>Circulation:
+    <select id="circulation">
+      <option value="2">2 – BP ±20% of baseline</option>
+      <option value="1">1 – BP ±20–49%</option>
+      <option value="0">0 – BP ±50%</option>
+    </select>
+  </label>
+  <label>Consciousness:
+    <select id="consciousness">
+      <option value="2">2 – Fully awake</option>
+      <option value="1">1 – Arousable on calling</option>
+      <option value="0">0 – Unresponsive</option>
+    </select>
+  </label>
+  <label>O₂ Saturation:
+    <select id="oxygenation">
+      <option value="2">2 – SpO₂ >92% on room air</option>
+      <option value="1">1 – SpO₂ >90% w/ O₂</option>
+      <option value="0">0 – SpO₂ <90% w/ O₂</option>
+    </select>
+  </label>
+  <button type="button" onclick="calculateScore()">Calculate Score</button>
+</form>
+
+<div class="result" id="resultBox"></div>
+
+<script>
+function calculateScore() {
+  const activity = parseInt(document.getElementById("activity").value);
+  const respiration = parseInt(document.getElementById("respiration").value);
+  const circulation = parseInt(document.getElementById("circulation").value);
+  const consciousness = parseInt(document.getElementById("consciousness").value);
+  const oxygenation = parseInt(document.getElementById("oxygenation").value);
+
+  const total = activity + respiration + circulation + consciousness + oxygenation;
+  let recommendation = (total >= 9) ? "Safe to Discharge" : "Hold and Reassess";
+
+  document.getElementById("resultBox").innerHTML = 
+    `Total Aldrete Score: <strong>${total}</strong><br>Recommendation: <strong>${recommendation}</strong>`;
+}
+</script>
+</body>
+</html>
